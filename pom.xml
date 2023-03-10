@@ -15,7 +15,7 @@
     </developers>
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
-        <log4j.version>2.19.0</log4j.version>
+        <log4j.version>2.20.0</log4j.version>
         <exec.mainClass>pkg.Main</exec.mainClass>
     </properties>
     <dependencies>

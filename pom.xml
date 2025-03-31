@@ -15,7 +15,7 @@
     </developers>
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
-        <log4j.version>2.20.0</log4j.version>
+        <log4j.version>2.24.3</log4j.version>
         <exec.mainClass>pkg.Main</exec.mainClass>
     </properties>
     <dependencies>
@@ -34,13 +34,13 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
+            <version>2.18.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
         <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>19.0.2</version>
+            <version>24</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

@@ -1,9 +1,10 @@
 package pkg;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,8 +25,6 @@ import javafx.scene.input.KeyCombination;
 
 import javafx.scene.layout.BorderPane;
 
-import org.apache.commons.io.FileUtils;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,7 +44,7 @@ public class Main extends Application {
         TextArea textArea = new TextArea();
         textArea.setPrefRowCount(20);
         textArea.setEditable(true);
-        textArea.setText(FileUtils.readFileToString(new File(configLocation)));
+        textArea.setText(Files.readString(Path.of(configLocation)));
         root.setCenter(textArea);
 
         MenuItem saveMenuItem = new MenuItem("Save");

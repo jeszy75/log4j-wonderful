@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -64,23 +66,21 @@ public class Log4jConfigEditor extends Application {
         menuBar.getMenus().add(fileMenu);
         root.setTop(menuBar);
 
-        Timer timer = new Timer(true);
-        timer.scheduleAtFixedRate(
-            new TimerTask() {
-                public void run() {
-                    logger.fatal("This is a FATAL message");
-                    logger.error("This is an ERROR message");
-                    logger.warn("This is a WARN message");
-                    logger.info("This is an INFO message");
-                    logger.debug("This is a DEBUG message");
-                    logger.trace("This is a TRACE message");
-                }
-            }, 0, 3000);
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        Runnable loggingTask = () -> {
+            logger.fatal("This is a FATAL message");
+            logger.error("This is an ERROR message");
+            logger.warn("This is a WARN message");
+            logger.info("This is an INFO message");
+            logger.debug("This is a DEBUG message");
+            logger.trace("This is a TRACE message");
+        };
+        scheduler.scheduleAtFixedRate(loggingTask, 0, 3, TimeUnit.SECONDS);
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle(configLocation);
-        primaryStage.setOnCloseRequest(event -> { timer.cancel(); Platform.exit(); System.exit(0); });
+        primaryStage.setOnCloseRequest(event -> { scheduler.shutdown(); Platform.exit(); System.exit(0); });
         primaryStage.show();
         Platform.setImplicitExit(true);
     }

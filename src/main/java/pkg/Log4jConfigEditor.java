@@ -80,7 +80,11 @@ public class Log4jConfigEditor extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle(configLocation);
-        primaryStage.setOnCloseRequest(event -> { scheduler.shutdown(); Platform.exit(); System.exit(0); });
+        primaryStage.setOnCloseRequest(event -> {
+            scheduler.shutdown();
+            Platform.exit();
+            System.exit(0);
+        });
         primaryStage.show();
         Platform.setImplicitExit(true);
     }
